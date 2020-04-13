@@ -7,7 +7,7 @@ const twemoji = require('twemoji');
 const twOptions = { folder: 'svg', ext: '.svg' };
 const emojify = (text: string) => twemoji.parse(text, twOptions);
 
-const rglr = readFileSync(`${__dirname}/../_fonts/Inter-Regular.woff2`).toString('base64');
+// const rglr = readFileSync(`${__dirname}/../_fonts/Inter-Regular.woff2`).toString('base64');
 const bold = readFileSync(`${__dirname}/../_fonts/Inter-Bold.woff2`).toString('base64');
 const mono = readFileSync(`${__dirname}/../_fonts/Vera-Mono.woff2`).toString('base64');
 
@@ -23,10 +23,9 @@ function getCss(theme: string, fontSize: string) {
     }
     return `
     @font-face {
-        font-family: 'Inter';
+        font-family: 'Arial';
         font-style:  normal;
         font-weight: normal;
-        src: url(data:font/woff2;charset=utf-8;base64,${rglr}) format('woff2');
     }
 
     @font-face {
@@ -93,7 +92,7 @@ function getCss(theme: string, fontSize: string) {
         margin: 0 .05em 0 .1em;
         vertical-align: -0.1em;
     }
-    
+
     .heading {
         font-family: 'Inter', sans-serif;
         font-size: ${sanitizeHtml(fontSize)};
