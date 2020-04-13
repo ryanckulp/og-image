@@ -1,10 +1,9 @@
 {
-  "regions": ["all"],
   "public": true,
   "version": 2,
   "functions": {
     "api/**": {
-      "memory": 1023
+      "memory": 1024
     }
   },
   "rewrites": [
