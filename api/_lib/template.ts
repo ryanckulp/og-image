@@ -107,6 +107,7 @@ export function getHtml(parsedReq: ParsedRequest) {
     <meta charset="utf-8">
     <title>Generated Image</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
     <style>
         ${getCss(theme, fontSize)}
     </style>
