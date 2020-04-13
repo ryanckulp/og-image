@@ -120,9 +120,10 @@ export function getHtml(parsedReq: ParsedRequest) {
                 ).join('')}
             </div>
             <div class="spacer">
-            <div class="heading">경찰 test ${emojify(
-                md ? marked(text) : sanitizeHtml(text)
-            )}
+            <div class="heading">
+                ${emojify(
+                    md ? marked(text) : sanitizeHtml(text)
+                )}
             </div>
         </div>
     </body>
