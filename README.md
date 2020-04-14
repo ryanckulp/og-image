@@ -15,7 +15,7 @@ Alternatively, you can do a one-click to deploy with the button below.
 ## Deployment
 
 via CLI: `now --prod # returns hosted url`
-view logs: `now logs https://og-image-jet.now.sh/`
+view logs: `now logs https://og-image-jet.now.sh/ -f`
 
 ## Authors
 
