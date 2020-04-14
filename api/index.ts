@@ -3,9 +3,9 @@ import { parseRequest } from './_lib/parser';
 import { getScreenshot } from './_lib/chromium';
 import { getHtml } from './_lib/template';
 
-const isDev = process.env.NOW_REGION === 'dev1';
-// const isHtmlDebug = process.env.OG_HTML_DEBUG === '1';
-const isHtmlDebug = true; // remove!
+// const isDev = process.env.NOW_REGION === 'dev1';
+const isDev = true; // override to allow Korean chars in prod
+const isHtmlDebug = process.env.OG_HTML_DEBUG === '1';
 
 export default async function handler(req: IncomingMessage, res: ServerResponse) {
     try {
