@@ -3,16 +3,11 @@
 import { FileType } from './types';
 import chromeOld from 'chrome-aws-lambda';
 // let _page: Page | null;
-// const b64buffer = require('base64-arraybuffer');
 
 // SELENIUM strategy
 const webdriver = require('selenium-webdriver');
 const chrome = require("selenium-webdriver/chrome");
 // require('chromedriver');
-
-// const atob = require("atob");
-// const Blob = require("cross-blob");
-// var toBuffer = require('blob-to-buffer');
 
 // async function getPage(isDev: boolean) {
 //     if (_page) {
@@ -42,6 +37,11 @@ export async function getScreenshot(html: string, type: FileType, isDev: boolean
     await console.log("chrome OPTIONS: ");
     await console.dir(options);
 
+    // EXPERIMENT - delete all 3 lines
+    // var path = require('chromedriver').path;
+    var service = new chrome.ServiceBuilder(bp).build();
+    chrome.setDefaultService(service);
+
     var driver = new webdriver.Builder().withCapabilities(options).build();
     driver.manage().window().setRect({width: 2048, height: 1170, x: 0, y: 0});
 
@@ -58,28 +58,3 @@ export async function getScreenshot(html: string, type: FileType, isDev: boolean
 
     return file;
 }
-
-// function base64toBlob(base64Data, contentType) {
-//     contentType = contentType || '';
-//     var sliceSize = 1024;
-//     var byteCharacters = atob(base64Data);
-//     var bytesLength = byteCharacters.length;
-//     var slicesCount = Math.ceil(bytesLength / sliceSize);
-//     var byteArrays = new Array(slicesCount);
-//
-//     for (var sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
-//         var begin = sliceIndex * sliceSize;
-//         var end = Math.min(begin + sliceSize, bytesLength);
-//
-//         var bytes = new Array(end - begin);
-//         for (var offset = begin, i = 0; offset < end; ++i, ++offset) {
-//             bytes[i] = byteCharacters[offset].charCodeAt(0);
-//         }
-//         byteArrays[sliceIndex] = new Uint8Array(bytes);
-//     }
-//     var blobber = new Blob(byteArrays, { type: contentType });
-//     // var buffer = new Buffer(blobber, "binary");
-//     var buffer = toBuffer(blobber);
-//
-//     return buffer;
-// }
