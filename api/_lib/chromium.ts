@@ -33,12 +33,13 @@ export async function getScreenshot(html: string, type: FileType, isDev: boolean
     var bp = await chromeOld.executablePath;
     console.log('executable path: ', bp);
 
-    options.addArguments(['--no-sandbox', '--headless', '--disable-dev-shm-usage']);
+    // options.addArguments(['--no-sandbox', '--headless', '--disable-dev-shm-usage']); // working
+    options.addArguments(chromeOld.args);
     await console.log("chrome OPTIONS: ");
     await console.dir(options);
 
     // EXPERIMENT - delete all 3 lines
-    var path = '/tmp/chromium'; // require('chromedriver').path;
+    // var path = '/tmp/chromium'; // require('chromedriver').path;
     var service = new chrome.ServiceBuilder(path).build();
     chrome.setDefaultService(service);
 
