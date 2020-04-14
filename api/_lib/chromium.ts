@@ -3,8 +3,6 @@ import { getOptions } from './options';
 import { FileType } from './types';
 let _page: Page | null;
 
-// const delay = ms => new Promise(res => setTimeout(res, ms));
-
 async function getPage(isDev: boolean) {
     if (_page) {
         return _page;
@@ -20,12 +18,14 @@ export async function getScreenshot(html: string, type: FileType, isDev: boolean
     const page = await getPage(isDev);
     await page.setViewport({ width: 2048, height: 1170 });
     await page.setContent(html);
-    // await page.setContent('<>시험 문자!');
-    await page.evaluateHandle('document.fonts.ready');
-    // await delay(10000); // check if font loads in prod
+
     console.log("HTML: ", html);
-    // await page.goto(`data:text/html,${html}`, { waitUntil: 'networkidle0' });
     // await page.goto(`data:text/html,${html}`, { waitUntil: 'networkidle2' });
+    // await page.goto('data:text/html,' + html, {waitUntil: 'networkidle2'});
+
+    await page.evaluate(function() {
+      document.getElementsByClassName('heading')[0].innerHTML = '<bold>hah</bold> unbold 경찰'
+    })
 
     // await delay(2000); // check if font loads in prod
     const file = await page.screenshot({ type });

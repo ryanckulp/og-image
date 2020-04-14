@@ -61,7 +61,7 @@ export async function getOptions(isDev: boolean) {
 
     if (isDev) {
         options = {
-            args: customArgs, // was [], then ['--disable-web-security']
+            args: [], // was [], then ['--disable-web-security']
             executablePath: exePath,
             headless: false // was true
         };
@@ -70,7 +70,7 @@ export async function getOptions(isDev: boolean) {
         // newArgs.push('--disable-web-security'); // added to render hangul in prod
 
         options = {
-            args: customArgs, // before: chrome.args
+            args: chrome.args, // before: chrome.args
             executablePath: await chrome.executablePath,
             headless: false, // was chrome.headless
         };
