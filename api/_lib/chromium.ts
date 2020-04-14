@@ -1,17 +1,14 @@
 // import { launch, Page } from 'puppeteer-core';
 // import { getOptions } from './options';
 import { FileType } from './types';
+import chromeOld from 'chrome-aws-lambda';
 // let _page: Page | null;
 // const b64buffer = require('base64-arraybuffer');
 
 // SELENIUM strategy
 const webdriver = require('selenium-webdriver');
 const chrome = require("selenium-webdriver/chrome");
-const exePath = process.platform === 'win32'
-? 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'
-: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-
-var chromedriver = require('chromedriver'); // experiment
+// require('chromedriver');
 
 // const atob = require("atob");
 // const Blob = require("cross-blob");
@@ -34,30 +31,14 @@ export async function getScreenshot(html: string, type: FileType, isDev: boolean
     console.log(html);
     console.log('fileType: ', type);
 
-    console.log('CHROMEDRIVER path: ', chromedriver.path);
-
-    // PUPPETEER strategy
-    // const page = await getPage(isDev);
-    //
-    // await page.setViewport({ width: 2048, height: 1170 });
-    // console.log(html);
-    //
-    // await page.setContent(html, { waitUntil: 'networkidle0' });
-    // // await page.setContent('<iframe src="https://024a7516.ngrok.io/iframe_words?q=경찰" width="100" height="100" frameBorder="0"></iframe>');
-    //
-    // // await page.goto(`data:text/html,${html}`, { waitUntil: 'networkidle2' });
-    //
-    // // await page.evaluate(function() {
-    // //   document.getElementsByClassName('heading')[0].innerHTML = '<bold>hah</bold> unbold 경찰'
-    // //   document.getElementsByClassName('heading')[0].innerHTML = decodeURI("%EC%95%88"); // insert encoded '안'
-    // // })
-    //
-    // const file = await page.screenshot({ type });
-
     // SELENIUM strategy - https://medium.com/@Moatazeldebsy/ui-testing-using-selenium-webdriver-and-chrome-inside-aws-lambda-77a17ec64862
     var options = new chrome.Options();
-    options.setChromeBinaryPath(exePath);
-    options.addArguments(['--headless']);
+
+    // options.setChromeBinaryPath('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome');
+    var bp = await chromeOld.executablePath;
+    console.log('executable path: ', bp);
+
+    options.addArguments(['--no-sandbox', '--headless', '--disable-dev-shm-usage']);
     await console.log("chrome OPTIONS: ");
     await console.dir(options);
 
