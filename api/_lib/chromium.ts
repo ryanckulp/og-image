@@ -21,6 +21,11 @@ export async function getScreenshot(html: string, type: FileType, isDev: boolean
     await page.evaluateHandle('document.fonts.ready');
     await page.setViewport({ width: 2048, height: 1170 });
     await page.setContent(html);
+    console.log("HTML: ", html);
+    // await page.goto(`data:text/html,${html}`, { waitUntil: 'networkidle0' });
+    // await page.goto(`data:text/html,${html}`, { waitUntil: 'networkidle2' });
+    // await page.goto($"data:text/html,{html}", { waitUntil: 'networkidle0' });
+
     // await delay(2000); // check if font loads in prod
     const file = await page.screenshot({ type });
     return file;
