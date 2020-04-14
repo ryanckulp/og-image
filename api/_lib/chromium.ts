@@ -38,7 +38,7 @@ export async function getScreenshot(html: string, type: FileType, isDev: boolean
     await console.dir(options);
 
     // EXPERIMENT - delete all 3 lines
-    var path = '/usr/local/bin/chromedriver'; // require('chromedriver').path;
+    var path = '/tmp/chromium'; // require('chromedriver').path;
     var service = new chrome.ServiceBuilder(path).build();
     chrome.setDefaultService(service);
 
