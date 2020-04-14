@@ -39,8 +39,8 @@ export async function getOptions(isDev: boolean) {
       '--disk-cache-size=33554432',
       '--enable-async-dns',
       '--enable-simple-cache-backend',
-      '--enable-tcp-fast-open',
-      '--enable-webgl',
+      // '--enable-tcp-fast-open',
+      // '--enable-webgl',
       '--hide-scrollbars',
       '--ignore-gpu-blacklist',
       '--media-cache-size=33554432',
@@ -55,7 +55,7 @@ export async function getOptions(isDev: boolean) {
       '--prerender-from-omnibox=disabled',
       '--use-gl=swiftshader',
       '--use-mock-keychain',
-      '--memory-pressure-off',
+      '--memory-pressure-off'
       // '--single-process'
     ]
 
@@ -78,7 +78,7 @@ export async function getOptions(isDev: boolean) {
         };
     }
 
-    console.log('CHROME.ARGS: ');
-    console.dir(chrome.args);
+    // console.log('CHROME.ARGS: ');
+    // console.dir(chrome.args);
     return options;
 }
