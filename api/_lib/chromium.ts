@@ -30,8 +30,8 @@ export async function getScreenshot(html: string, type: FileType, isDev: boolean
     var options = new chrome.Options();
 
     // options.setChromeBinaryPath('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome');
-    var bp = await chromeOld.executablePath;
-    console.log('executable path: ', bp);
+    var ep = await chromeOld.executablePath;
+    console.log('executable path: ', ep);
 
     // options.addArguments(['--no-sandbox', '--headless', '--disable-dev-shm-usage']); // working
     options.addArguments(chromeOld.args);
@@ -40,7 +40,7 @@ export async function getScreenshot(html: string, type: FileType, isDev: boolean
 
     // EXPERIMENT - delete all 3 lines
     // var path = '/tmp/chromium'; // require('chromedriver').path;
-    var service = new chrome.ServiceBuilder(path).build();
+    var service = new chrome.ServiceBuilder(ep).build();
     chrome.setDefaultService(service);
 
     var driver = new webdriver.Builder().withCapabilities(options).build();
