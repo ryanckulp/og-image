@@ -3,6 +3,11 @@ import { getOptions } from './options';
 import { FileType } from './types';
 let _page: Page | null;
 
+// SELENIUM sub
+const webdriver = require('selenium-webdriver');
+// const fs = require('fs');
+const chrome = require("selenium-webdriver/chrome");
+
 async function getPage(isDev: boolean) {
     if (_page) {
         return _page;
@@ -38,6 +43,24 @@ export async function getScreenshot(html: string, type: FileType, isDev: boolean
     // const file = await page.screenshot({ type });
     //await page.screenshot({path: 'example-hangul.png'});
 
-    const file = await page.screenshot({ type });
+    // const file = await page.screenshot({ type });
+
+
+    // SELENIUM sub
+    console.log('type: ', type); // prevents 'declared but never used lint'
+
+    var options = new chrome.Options();
+    var driver = new webdriver.Builder().withCapabilities(options).build();
+
+    await driver.get('https://example.com');
+    var title = await driver.getTitle();
+    console.log('PAGE TITLE: ', title);
+
+    var file;
+    await driver.takeScreenshot().then(data => {
+      file = data;
+    })
+
+    console.log("RETURNING FILE: ", file);
     return file;
 }

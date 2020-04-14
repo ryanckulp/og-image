@@ -8,8 +8,10 @@
   },
   "dependencies": {
     "chrome-aws-lambda": "2.1.1",
+    "fs": "0.0.1-security",
     "marked": "0.8.2",
     "puppeteer-core": "2.1.1",
+    "selenium-webdriver": "^4.0.0-alpha.7",
     "twemoji": "12.1.5"
   },
   "devDependencies": {
