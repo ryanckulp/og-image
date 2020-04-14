@@ -8,6 +8,9 @@ import { FileType } from './types';
 // SELENIUM strategy
 const webdriver = require('selenium-webdriver');
 const chrome = require("selenium-webdriver/chrome");
+const exePath = process.platform === 'win32'
+? 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'
+: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 
 // const atob = require("atob");
 // const Blob = require("cross-blob");
@@ -25,8 +28,10 @@ const chrome = require("selenium-webdriver/chrome");
 // }
 
 export async function getScreenshot(html: string, type: FileType, isDev: boolean) {
+    // prevents 'declared but never used lint'
     console.log(isDev);
     console.log(html);
+    console.log('fileType: ', type);
 
     // PUPPETEER strategy
     // const page = await getPage(isDev);
@@ -46,9 +51,10 @@ export async function getScreenshot(html: string, type: FileType, isDev: boolean
     //
     // const file = await page.screenshot({ type });
 
-    // SELENIUM strategy
-    console.log('type: ', type); // prevents 'declared but never used lint'
+    // SELENIUM strategy - https://medium.com/@Moatazeldebsy/ui-testing-using-selenium-webdriver-and-chrome-inside-aws-lambda-77a17ec64862
     var options = new chrome.Options();
+    options.setChromeBinaryPath(exePath);
+    options.addArguments(['--headless']);
     await console.log("chrome OPTIONS: ");
     await console.dir(options);
 
