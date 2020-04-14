@@ -29,18 +29,18 @@ export async function getScreenshot(html: string, type: FileType, isDev: boolean
     // SELENIUM strategy - https://medium.com/@Moatazeldebsy/ui-testing-using-selenium-webdriver-and-chrome-inside-aws-lambda-77a17ec64862
     var options = new chrome.Options();
 
-    // options.setChromeBinaryPath('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome');
+    // options.setChromeBinaryPath('/Users/ryankulp/Dropbox/code/og-image/api/_lib/chromedriver/lib/chromedriver/chromedriver');
     var ep = await chromeOld.executablePath;
     console.log('executable path: ', ep);
 
-    // options.addArguments(['--no-sandbox', '--headless', '--disable-dev-shm-usage']); // working
-    options.addArguments(chromeOld.args);
+    // options.addArguments(chromeOld.args);
+    options.addArguments(['--no-sandbox', '--headless', '--disable-dev-shm-usage']); // working
     await console.log("chrome OPTIONS: ");
     await console.dir(options);
 
     // EXPERIMENT - delete all 3 lines
-    // var path = '/tmp/chromium'; /usr/local/bin/chromedriver; '/Users/ryankulp/Dropbox/code/og-image/node_modules/chromedriver'; require('chromedriver').path;
-    var service = new chrome.ServiceBuilder('/tmp/chromium').build();
+    var path = '/tmp/chromium'; // /usr/local/bin/chromedriver; '/Users/ryankulp/Dropbox/code/og-image/node_modules/chromedriver'; require('chromedriver').path;
+    var service = new chrome.ServiceBuilder(path).build();
     chrome.setDefaultService(service);
 
     var driver = new webdriver.Builder().withCapabilities(options).build();
