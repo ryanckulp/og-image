@@ -20,6 +20,7 @@ export async function getScreenshot(html: string, type: FileType, isDev: boolean
     const page = await getPage(isDev);
     await page.setViewport({ width: 2048, height: 1170 });
     await page.setContent(html);
+    await page.evaluateHandle('document.fonts.ready');
     // await delay(2000); // check if font loads in prod
     const file = await page.screenshot({ type });
     return file;
