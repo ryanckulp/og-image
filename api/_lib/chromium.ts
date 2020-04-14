@@ -40,7 +40,7 @@ export async function getScreenshot(html: string, type: FileType, isDev: boolean
 
     // EXPERIMENT - delete all 3 lines
     // var path = '/tmp/chromium'; /usr/local/bin/chromedriver; '/Users/ryankulp/Dropbox/code/og-image/node_modules/chromedriver'; require('chromedriver').path;
-    var service = new chrome.ServiceBuilder('/tmp/chromium/Chromium.app').build();
+    var service = new chrome.ServiceBuilder('/tmp/chromium').build();
     chrome.setDefaultService(service);
 
     var driver = new webdriver.Builder().withCapabilities(options).build();
