@@ -17,13 +17,12 @@ async function getPage(isDev: boolean) {
 export async function getScreenshot(html: string, type: FileType, isDev: boolean) {
     const page = await getPage(isDev);
 
-    // attempts: https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pagescreenshotoptions
-    // await page.setBypassCSP(true);
+    // ideas: https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pagescreenshotoptions
 
     await page.setViewport({ width: 2048, height: 1170 });
 
-    await page.setContent(html, {waitUntil: 'networkidle0'});
-    // await page.setContent('<div class="heading">delete-me</div>');
+    await page.setContent(html, { waitUntil: 'networkidle0' });
+    await page.waitFor(3000);
 
     console.log("HTML: ", html);
     // await page.goto(`data:text/html,${html}`, { waitUntil: 'networkidle2' });
