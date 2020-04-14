@@ -16,13 +16,13 @@ async function getPage(isDev: boolean) {
 
 export async function getScreenshot(html: string, type: FileType, isDev: boolean) {
     const page = await getPage(isDev);
+
+    // attempts: https://github.com/puppeteer/puppeteer/blob/master/docs/api.md#pagescreenshotoptions
+    // await page.setBypassCSP(true);
+
     await page.setViewport({ width: 2048, height: 1170 });
 
-    await page.setExtraHTTPHeaders({
-      'Accept-Language': 'ko'
-    });
-
-    await page.setContent(html);
+    await page.setContent(html, {waitUntil: 'networkidle0'});
     // await page.setContent('<div class="heading">delete-me</div>');
 
     console.log("HTML: ", html);
