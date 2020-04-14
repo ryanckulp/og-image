@@ -19,10 +19,11 @@ export async function getOptions(isDev: boolean) {
         };
     } else {
         options = {
-            args: chrome.args,
+            args: [], // before: chrome.args (maybe args changing font render)
             executablePath: await chrome.executablePath,
             headless: chrome.headless,
         };
     }
+
     return options;
 }
