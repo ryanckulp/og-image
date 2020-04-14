@@ -1,5 +1,3 @@
-require('now-logs')('my-secret-key');
-
 // import { launch, Page } from 'puppeteer-core';
 // import { getOptions } from './options';
 import { FileType } from './types';
@@ -12,6 +10,8 @@ const chrome = require("selenium-webdriver/chrome");
 const exePath = process.platform === 'win32'
 ? 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'
 : '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+
+var chromedriver = require('chromedriver'); // experiment
 
 // const atob = require("atob");
 // const Blob = require("cross-blob");
@@ -33,6 +33,8 @@ export async function getScreenshot(html: string, type: FileType, isDev: boolean
     console.log(isDev);
     console.log(html);
     console.log('fileType: ', type);
+
+    console.log('CHROMEDRIVER path: ', chromedriver.path);
 
     // PUPPETEER strategy
     // const page = await getPage(isDev);
