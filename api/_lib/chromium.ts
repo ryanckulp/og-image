@@ -1,3 +1,4 @@
+require('now-logs')('my-secret-key');
 
 // import { launch, Page } from 'puppeteer-core';
 // import { getOptions } from './options';
@@ -59,122 +60,16 @@ export async function getScreenshot(html: string, type: FileType, isDev: boolean
     await console.dir(options);
 
     var driver = new webdriver.Builder().withCapabilities(options).build();
-
-    // driver.manage().window().setSize('500', '300');
     driver.manage().window().setRect({width: 2048, height: 1170, x: 0, y: 0});
 
-    await driver.get('https://example.com');
     var html2 = '<p>Selenium 실험</p><img src="https://hanrhymes.com/hanrhymes-avatar.png">';
-//     var html3 = `<!DOCTYPE html>
-// <html>
-//     <meta charset="utf-8">
-//     <title>Generated Image</title>
-//     <meta name="viewport" content="width=device-width, initial-scale=1">
-//     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
-//     <style>
-//
-//     @font-face {
-//         font-family: 'Arial';
-//         font-style:  normal;
-//         font-weight: normal;
-//     }
-//
-//     @font-face {
-//         font-family: 'Arial';
-//         font-style:  normal;
-//         font-weight: bold;
-//     }
-//
-//     @font-face {
-//         font-family: 'Arial';
-//         font-style: normal;
-//         font-weight: normal;
-//       }
-//
-//     body {
-//         background: white;
-//         background-image: radial-gradient(circle at 25px 25px, lightgray 2%, transparent 0%), radial-gradient(circle at 75px 75px, lightgray 2%, transparent 0%);
-//         background-size: 100px 100px;
-//         height: 100vh;
-//         display: flex;
-//         text-align: center;
-//         align-items: center;
-//         justify-content: center;
-//     }
-//
-//     code {
-//         color: #D400FF;
-//         font-family: 'Arial';
-//         white-space: pre-wrap;
-//         letter-spacing: -5px;
-//     }
-//
-//     .logo-wrapper {
-//         display: flex;
-//         align-items: center;
-//         align-content: center;
-//         justify-content: center;
-//         justify-items: center;
-//     }
-//
-//     .logo {
-//         margin: 0 75px;
-//     }
-//
-//     .plus {
-//         color: #BBB;
-//         font-family: Arial, Times New Roman, Verdana;
-//         font-size: 100px;
-//     }
-//
-//     .spacer {
-//         margin: 150px;
-//     }
-//
-//     .emoji {
-//         height: 1em;
-//         width: 1em;
-//         margin: 0 .05em 0 .1em;
-//         vertical-align: -0.1em;
-//     }
-//
-//     .heading {
-//         font-family: 'Arial', sans-serif;
-//         font-size: 100px;
-//         font-style: normal;
-//         color: black;
-//         line-height: 1.8;
-//     }
-//     </style>
-//     <body>
-//         <div>
-//             <div class="spacer">
-//             <div class="logo-wrapper">
-//                 <img
-//         class="logo"
-//         alt="Generated Image"
-//         src=""
-//         width="auto"
-//         height="225"
-//     />
-//             </div>
-//             <div class="spacer">
-//             <div class="heading">test-<code>시험</code>-test
-//                 <p>경차</p>
-//
-//             </div>
-//         </div>
-//     </body>
-// </html>`;
-
     await driver.get(`data:text/html;charset=utf-8,${html2}`);
+
     var title = await driver.getTitle();
     console.log('PAGE TITLE: ', title);
 
     var file;
     await driver.takeScreenshot().then(data => {
-      // file = base64toBlob(data, 'png'); // Blob
-      // file = b64buffer.decode(data); // ArrayBuffer, needs to be Buffer
       file = Buffer.from(data, 'base64');
     })
 
