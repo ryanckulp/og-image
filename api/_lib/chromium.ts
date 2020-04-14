@@ -8,6 +8,7 @@ import chromeOld from 'chrome-aws-lambda';
 const webdriver = require('selenium-webdriver');
 const chrome = require("selenium-webdriver/chrome");
 // require('chromedriver');
+const { join } = require('path');
 
 // async function getPage(isDev: boolean) {
 //     if (_page) {
@@ -38,9 +39,14 @@ export async function getScreenshot(html: string, type: FileType, isDev: boolean
     await console.log("chrome OPTIONS: ");
     await console.dir(options);
 
+    // interesting logs -- try to find chrome binary
+    // const fullPath = join(__dirname, '../../node_modules/chromedriver/bin/chromedriver');
+    const fullPath = join(__dirname, '../../tmp/chromium');
+    console.log("fullPath: ", fullPath);
+
     // EXPERIMENT - delete all 3 lines
-    var path = '/tmp/chromium'; // /usr/local/bin/chromedriver; '/Users/ryankulp/Dropbox/code/og-image/node_modules/chromedriver'; require('chromedriver').path;
-    var service = new chrome.ServiceBuilder(path).build();
+    // var path = '/Users/ryankulp/Dropbox/code/og-image/api/_lib/chromedriver/bin/chromedriver'; // /usr/local/bin/chromedriver; '/Users/ryankulp/Dropbox/code/og-image/node_modules/chromedriver'; require('chromedriver').path;
+    var service = new chrome.ServiceBuilder(fullPath).build();
     chrome.setDefaultService(service);
 
     var driver = new webdriver.Builder().withCapabilities(options).build();
