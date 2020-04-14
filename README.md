@@ -6,13 +6,16 @@ Make changes by swapping out images, changing colors, etc (see [contributing](ht
 
 Run locally with `now dev` and visit [localhost:3000](http://localhost:3000)  (if nothing happens, run `npm install -g now`)
 
-To deploy to production (og-image-jet.now.sh), run `now --prod` and you'll get a unique URL.
-
 Optional: setup [GitHub](https://zeit.co/github) to autodeply on push
 
 Alternatively, you can do a one-click to deploy with the button below.
 
 [![Deploy to now](https://zeit.co/button)](https://zeit.co/new/project?template=zeit/og-image)
+
+## Deployment
+
+via CLI: `now --prod # returns hosted url`
+view logs: `now logs https://og-image-jet.now.sh/`
 
 ## Authors
 
