@@ -18,13 +18,13 @@ async function getPage(isDev: boolean) {
 
 export async function getScreenshot(html: string, type: FileType, isDev: boolean) {
     const page = await getPage(isDev);
-    await page.evaluateHandle('document.fonts.ready');
     await page.setViewport({ width: 2048, height: 1170 });
     await page.setContent(html);
+    await page.evaluateHandle('document.fonts.ready');
+    // await delay(10000); // check if font loads in prod
     console.log("HTML: ", html);
     // await page.goto(`data:text/html,${html}`, { waitUntil: 'networkidle0' });
     // await page.goto(`data:text/html,${html}`, { waitUntil: 'networkidle2' });
-    // await page.goto($"data:text/html,{html}", { waitUntil: 'networkidle0' });
 
     // await delay(2000); // check if font loads in prod
     const file = await page.screenshot({ type });
