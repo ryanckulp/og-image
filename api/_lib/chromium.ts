@@ -22,17 +22,17 @@ export async function getScreenshot(html: string, type: FileType, isDev: boolean
       'Accept-Language': 'ko'
     });
 
-    // await page.setContent(html);
-    await page.setContent('<div class="heading">delete-me</div>');
+    await page.setContent(html);
+    // await page.setContent('<div class="heading">delete-me</div>');
 
     console.log("HTML: ", html);
     // await page.goto(`data:text/html,${html}`, { waitUntil: 'networkidle2' });
     // await page.goto('data:text/html,' + html, {waitUntil: 'networkidle2'});
 
-    await page.evaluate(function() {
-      // document.getElementsByClassName('heading')[0].innerHTML = '<bold>hah</bold> unbold 경찰'
-      document.getElementsByClassName('heading')[0].innerHTML = decodeURI("%EC%95%88"); // insert encoded '안'
-    })
+    // await page.evaluate(function() {
+    //   // document.getElementsByClassName('heading')[0].innerHTML = '<bold>hah</bold> unbold 경찰'
+    //   document.getElementsByClassName('heading')[0].innerHTML = decodeURI("%EC%95%88"); // insert encoded '안'
+    // })
 
     const file = await page.screenshot({ type });
     return file;
