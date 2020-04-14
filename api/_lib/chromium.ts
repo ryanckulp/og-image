@@ -22,9 +22,9 @@ export async function getScreenshot(html: string, type: FileType, isDev: boolean
 
     await page.setViewport({ width: 2048, height: 1170 });
     console.log(html);
-    
-    // await page.setContent(html, { waitUntil: 'networkidle0' });
-    await page.setContent('<iframe src="https://024a7516.ngrok.io/iframe_words?q=경찰" width="100" height="100" frameBorder="0"></iframe>');
+
+    await page.setContent(html, { waitUntil: 'networkidle0' });
+    // await page.setContent('<iframe src="https://024a7516.ngrok.io/iframe_words?q=경찰" width="100" height="100" frameBorder="0"></iframe>');
     // console.log("HTML: ", html);
 
     // await page.goto(`data:text/html,${html}`, { waitUntil: 'networkidle2' });
