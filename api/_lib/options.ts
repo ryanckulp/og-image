@@ -19,11 +19,12 @@ export async function getOptions(isDev: boolean) {
             headless: false // was true
         };
     } else {
-        // var newArgs = chrome.args;
-        // newArgs.push('--disable-web-security'); // added to render hangul in prod
+        var newArgs = chrome.args;
+        newArgs.push('--disable-web-security'); // added to render hangul in prod
+        newArgs.push('--lang=ko-KR,ko');
 
         options = {
-            args: chrome.args, // before: chrome.args
+            args: newArgs, // before: chrome.args
             executablePath: await chrome.executablePath,
             headless: false, // was chrome.headless
         };

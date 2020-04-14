@@ -17,6 +17,11 @@ async function getPage(isDev: boolean) {
 export async function getScreenshot(html: string, type: FileType, isDev: boolean) {
     const page = await getPage(isDev);
     await page.setViewport({ width: 2048, height: 1170 });
+
+    await page.setExtraHTTPHeaders({
+      'Accept-Language': 'ko'
+    });
+
     // await page.setContent(html);
     await page.setContent('<div class="heading">delete-me</div>');
 
@@ -29,7 +34,6 @@ export async function getScreenshot(html: string, type: FileType, isDev: boolean
       document.getElementsByClassName('heading')[0].innerHTML = decodeURI("%EC%95%88"); // insert encoded '안'
     })
 
-    // await delay(2000); // check if font loads in prod
     const file = await page.screenshot({ type });
     return file;
 }
