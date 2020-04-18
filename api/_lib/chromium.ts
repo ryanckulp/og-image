@@ -38,6 +38,10 @@ export async function getScreenshot(html: string, type: FileType, isDev: boolean
     var files = fs.readdirSync(tmpFilesPath);
     console.log('files (ABOVE root): ', files);
 
+    var tmpFilesDirectory = join(__dirname, '../../../tmp'); // 1 above root
+    var files = fs.readdirSync(tmpFilesDirectory);
+    console.log('files (ABOVE root - TMP): ', files);
+
     // SELENIUM strategy - https://medium.com/@Moatazeldebsy/ui-testing-using-selenium-webdriver-and-chrome-inside-aws-lambda-77a17ec64862
     var options = new chrome.Options();
 
