@@ -10,6 +10,8 @@ const chrome = require("selenium-webdriver/chrome");
 // require('chromedriver');
 const { join } = require('path');
 
+
+var fs = require('fs');
 // async function getPage(isDev: boolean) {
 //     if (_page) {
 //         return _page;
@@ -27,6 +29,15 @@ export async function getScreenshot(html: string, type: FileType, isDev: boolean
     console.log(html);
     console.log('fileType: ', type);
 
+
+    var tmpFilesPath = join(__dirname, '../../');
+    var files = fs.readdirSync(tmpFilesPath);
+    console.log('files (ROOT): ', files);
+
+    var tmpFilesPath = join(__dirname, '../../public'); // works!
+    var files = fs.readdirSync(tmpFilesPath);
+    console.log('files (PUBLIC): ', files);
+
     // SELENIUM strategy - https://medium.com/@Moatazeldebsy/ui-testing-using-selenium-webdriver-and-chrome-inside-aws-lambda-77a17ec64862
     var options = new chrome.Options();
 
@@ -41,13 +52,13 @@ export async function getScreenshot(html: string, type: FileType, isDev: boolean
 
     // interesting logs -- try to find chrome binary
     // const fullPath = join(__dirname, '../../node_modules/chromedriver/bin/chromedriver');
-    const fullPath = join(__dirname, '../../tmp/chromium');
-    console.log("fullPath: ", fullPath);
+    // const fullPath = join(__dirname, '../../tmp/chromium');
+    // console.log("fullPath: ", fullPath);
 
     // EXPERIMENT - delete all 3 lines
     // var path = '/Users/ryankulp/Dropbox/code/og-image/api/_lib/chromedriver/bin/chromedriver'; // /usr/local/bin/chromedriver; '/Users/ryankulp/Dropbox/code/og-image/node_modules/chromedriver'; require('chromedriver').path;
-    var service = new chrome.ServiceBuilder(fullPath).build();
-    chrome.setDefaultService(service);
+    // var service = new chrome.ServiceBuilder(fullPath).build();
+    // chrome.setDefaultService(service);
 
     var driver = new webdriver.Builder().withCapabilities(options).build();
     driver.manage().window().setRect({width: 2048, height: 1170, x: 0, y: 0});
