@@ -29,18 +29,29 @@ export async function getScreenshot(html: string, type: FileType, isDev: boolean
     console.log(html);
     console.log('fileType: ', type);
 
-
-    var tmpFilesPath = join(__dirname, '../../');
-    var files = fs.readdirSync(tmpFilesPath);
-    console.log('files (ROOT): ', files);
-
     var tmpFilesPath = join(__dirname, '../../../'); // 1 above root
     var files = fs.readdirSync(tmpFilesPath);
     console.log('files (ABOVE root): ', files);
+    // [
+    //                         'adm',       'cache', 'db',
+    //                         'empty',     'games', 'gopher',
+    //                         'kerberos',  'lang',  'lib',
+    //                         'local',     'lock',  'log',
+    //                         'mail',      'nis',   'opt',
+    //                         'preserve',  'rapid', 'run',
+    //                         'runtime',   'spool', 'task',
+    //                         'telemetry', 'tmp',   'tracer',
+    //                         'yp'
+    //                       ]
 
-    var tmpFilesDirectory = join(__dirname, '../../../tmp'); // 1 above root
-    var files = fs.readdirSync(tmpFilesDirectory);
-    console.log('files (ABOVE root - TMP): ', files);
+
+    // var tmpFilesDirectory = join(__dirname, '../../../tmp'); // folder exists but EMPTY
+    var libFilesDirectory = join(__dirname, '../../../lib'); // folder exists but EMPTY
+    var localFilesDirectory = join(__dirname, '../../../local'); // folder exists but EMPTY
+    var files = fs.readdirSync(libFilesDirectory);
+    console.log('files (ABOVE root - LIB): ', files);
+    var files = fs.readdirSync(localFilesDirectory);
+    console.log('files (ABOVE root - LOCAL): ', files);
 
     // SELENIUM strategy - https://medium.com/@Moatazeldebsy/ui-testing-using-selenium-webdriver-and-chrome-inside-aws-lambda-77a17ec64862
     var options = new chrome.Options();
