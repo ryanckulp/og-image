@@ -34,9 +34,9 @@ export async function getScreenshot(html: string, type: FileType, isDev: boolean
     var files = fs.readdirSync(tmpFilesPath);
     console.log('files (ROOT): ', files);
 
-    var tmpFilesPath = join(__dirname, '../../public'); // works!
+    var tmpFilesPath = join(__dirname, '../../../'); // 1 above root
     var files = fs.readdirSync(tmpFilesPath);
-    console.log('files (PUBLIC): ', files);
+    console.log('files (ABOVE root): ', files);
 
     // SELENIUM strategy - https://medium.com/@Moatazeldebsy/ui-testing-using-selenium-webdriver-and-chrome-inside-aws-lambda-77a17ec64862
     var options = new chrome.Options();
